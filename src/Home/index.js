@@ -1,44 +1,26 @@
 import React, {Component} from 'react';
+import {inject, observer} from 'mobx-react';
 
+@inject('stores')
+@observer
 class Home extends Component {
     state = {
-        boards:[
-            {
-                no: 1,
-                title:'2018학년도 교원능력개발평가 운영결과보고서',
-                writer:'나요섭',
-                date: new Date()
-            },
-            {
-                no: 2,
-                title:'2018학년도 교원능력개발평가 운영결과보고서',
-                writer:'나요섭',
-                date: new Date()
-            },
-            {
-                no: 3,
-                title:'2018학년도 교원능력개발평가 운영결과보고서',
-                writer:'나요섭',
-                date: new Date()
-            }
-        ]
+        value: 1
     };
 
     render() {
-        let {boards} = this.state;
+        let t = this.props.stores.TimeStore;
+        let p = this.props.stores.PostStore;
 
         return (
             <div>
-                <table border="0">
-                    <tbody align="center">
-                    <tr>
-                        <td width="100px;">번호</td>
-                        <td width="600px;">제목</td>
-                        <td width="200px;">작성자</td>
-                        <td width="300px;">작성일</td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div>{p.current_time && p.current_time}</div>
+                <div>{p.ms}</div>
+                <div><button onClick={p.getTime}>getTime</button></div>
+
+                <div>{t.current_time && t.current_time.toString()}</div>
+                <div>{t.ms}</div>
+                <div><button onClick={t.getTime}>getTime</button></div>
             </div>
         );
     }
