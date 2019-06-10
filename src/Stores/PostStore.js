@@ -40,6 +40,49 @@ class PostStore{
         }
 
     }
+
+    @observable viewItem = null;
+    @action fetchItem = async (postid) => {
+        try {
+            this.viewItem = null;
+            let response = await axios({
+                url: `http://localhost:8080/api/getBoardId/${postid}`,
+                method: 'get',
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8'
+                },
+                timeout: 3000
+            });
+            if(response.status === 200)
+                setTimeout(
+                    ()=>this.viewItem = response.data,
+                    2000
+                );
+
+        } catch(ex) {
+            alert(ex.toLocaleString());
+        }
+    };
+
+    @observable
+    @action addNewPost = async (post) => {
+        try{
+            let response = await axios({
+                url: 'http://localhost:8080/api/postBoard',
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8'
+                },
+                data: JSON.stringify(post),
+                timeout: 3000
+            });
+            return (response.status === 200);
+
+        } catch (err) {
+            console.log(err.toLocaleString());
+            return false;
+        }
+    }
 }
 
 export default PostStore.getInstance();

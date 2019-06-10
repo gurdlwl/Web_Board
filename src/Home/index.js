@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {inject, observer} from 'mobx-react';
 import Board from '../Board';
-import './index.scss'
+import '../Board/Board.scss'
 
 @inject('stores')
 @observer
