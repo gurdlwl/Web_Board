@@ -58,9 +58,8 @@ class PostStore{
                     ()=>this.viewItem = response.data,
                     2000
                 );
-
-        } catch(ex) {
-            alert(ex.toLocaleString());
+        } catch(err) {
+            console.log(err.toLocaleString());
         }
     };
 
@@ -82,7 +81,43 @@ class PostStore{
             console.log(err.toLocaleString());
             return false;
         }
-    }
+    };
+
+    @observable
+    @action deletePost = async(postid) => {
+        try{
+            let response = await axios({
+                url: `http://localhost:8080/api/deleteBoard/${postid}`,
+                method: 'delete',
+                timeout: 3000
+            });
+            return (response.status === 200);
+
+        } catch (err) {
+            console.log(err.toLocaleString());
+            return false;
+        }
+    };
+
+    @observable
+    @action editPost = async (post) => {
+        try{
+            let response = await axios({
+                url: 'http://localhost:8080/api/putBoard',
+                method: 'put',
+                headers: {
+                    'Content-Type': 'application/json; charset=UTF-8'
+                },
+                data: JSON.stringify(post),
+                timeout: 3000
+            });
+            return (response.status === 200);
+
+        } catch (err) {
+            console.log(err.toLocaleString());
+            return false;
+        }
+    };
 }
 
 export default PostStore.getInstance();

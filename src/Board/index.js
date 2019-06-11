@@ -20,11 +20,14 @@ class Board extends Component {
     render() {
         //if(this.props.match && this.props.match.params.postid)
         if(this.props.match && this.props.match.params.command === 'getBoardId')
-            return <PostView postid={this.props.match.params.postid}/>;
+            return <PostView postid={this.props.match.params.postid} />;
 
         //if(this.props.location && this.props.location.pathname === '/board/add')
         if(this.props.match && this.props.match.params.command === 'add')
             return <PostAdd />;
+
+        if(this.props.match && this.props.match.params.command === 'edit')
+            return <PostAdd postid={this.props.match.params.postid} />
 
         let p = this.props.stores.PostStore;
         return (
