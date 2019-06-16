@@ -35,6 +35,7 @@ class PostStore{
 
             if(response.status === 200)
                 this.items = response.data;
+
         } catch(err){
             console.log(err.toLocaleString());
         }
@@ -45,6 +46,7 @@ class PostStore{
     @action fetchItem = async (postid) => {
         try {
             this.viewItem = null;
+
             let response = await axios({
                 url: `http://localhost:8080/api/getBoardId/${postid}`,
                 method: 'get',
@@ -53,11 +55,13 @@ class PostStore{
                 },
                 timeout: 3000
             });
+
             if(response.status === 200)
                 setTimeout(
                     ()=>this.viewItem = response.data,
                     2000
                 );
+
         } catch(err) {
             console.log(err.toLocaleString());
         }

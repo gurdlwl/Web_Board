@@ -6,7 +6,6 @@ import '../Board/Board.scss'
 @inject('stores')
 @observer
 class Home extends Component {
-
     render() {
         return (
             <div>

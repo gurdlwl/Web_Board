@@ -4,6 +4,7 @@ import {Provider} from 'mobx-react';
 
 import Home from './Home';
 import Board from './Board';
+import User from './User/Login';
 
 import './App.scss';
 
@@ -22,6 +23,7 @@ const App = () => (
                 <section className='app-body'>
                       <Route path='/' exact component={Home} />
                       <Route path='/board/:command?/:postid?' exact component={Board} />
+                      <Route path='/user/login' exact component={User}/>
                 </section>
           </BrowserRouter>
     </Provider>

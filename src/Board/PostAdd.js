@@ -4,6 +4,8 @@ import {Redirect} from 'react-router-dom';
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
+import './Board.scss';
+
 @inject('stores')
 @observer
 class PostAdd extends Component {
@@ -55,6 +57,8 @@ class PostAdd extends Component {
     }
 
     addNewPost = async () => {
+        if(window.confirm("등록 하시겠습니까?") === false) return;
+
         if (this.props.postid && await this.props.stores.PostStore.editPost(this.state)) {
             await this.props.stores.PostStore.fetchItems();
             this.setState({

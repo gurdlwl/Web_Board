@@ -12,7 +12,6 @@ import PostAdd from './PostAdd';
 class Board extends Component {
 
     componentDidMount() {
-        console.log("123");
         this.props.stores.PostStore.fetchItems();
         console.log(this.props);
     }
